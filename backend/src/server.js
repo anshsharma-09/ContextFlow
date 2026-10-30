@@ -45,4 +45,8 @@ async function start(){
     process.exit(1);
   }
 }
-start();
+if (require.main === module) {
+  start();
+}
+
+module.exports = app;

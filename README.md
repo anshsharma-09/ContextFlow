@@ -229,7 +229,7 @@ The special feature is **Smart Context Handover**. Instead of handing a teammate
 
 ## 11. Deployment notes
 
-The included Dockerfiles and Compose configuration provide a reproducible container deployment. For a hosted submission, deploy the frontend and backend to a platform supporting persistent environment variables, a managed MySQL database, HTTPS and persistent/external logs. Configure `DB_*`, `AI_PROVIDER`, `GEMINI_API_KEY`, `GEMINI_MODEL`, `FRONTEND_URL` and `PORT` in the hosting environment. Never commit secrets. Run `npm run db:setup` once per environment before the backend accepts traffic.
+The included Dockerfiles and Compose configuration provide a reproducible container deployment. For Vercel, create two projects from this repository: set the backend project's Root Directory to `backend` and the frontend project's Root Directory to `frontend`. The backend exposes its Express app through `backend/api/[...path].js`; configure `DB_*`, `AI_PROVIDER`, `GEMINI_API_KEY`, `GEMINI_MODEL` and `FRONTEND_URL` in the backend project. Set the frontend project's `VITE_API_URL` to the backend deployment origin (without a trailing slash). Use a managed MySQL database reachable from Vercel, and run `npm run db:setup` once per environment before the backend accepts traffic. Never commit secrets.
 
 ## 12. Development and debugging
 
