@@ -1,0 +1,21 @@
+CONTEXTFLOW — START HERE
+
+1. Read README.md.
+2. Windows + local MySQL:
+   - Open backend/.env.example, copy it to backend/.env, enter your own MySQL credentials.
+   - In a terminal: cd backend ; npm install ; npm run db:setup ; npm run dev
+   - In another terminal: cd frontend ; npm install ; npm run dev
+   - Open http://localhost:5173
+3. Or use Docker Compose from the project root:
+   - Copy .env.example to .env and set MYSQL_ROOT_PASSWORD.
+   - Run: docker compose up --build
+   - Open http://localhost:5173
+
+Default AI_PROVIDER=demo: clearly labelled local demo output, no Gemini key required.
+For real Gemini: set AI_PROVIDER=gemini and GEMINI_API_KEY in backend/.env (or root .env for Docker Compose).
+Never share or commit API keys or DB passwords.
+
+Database name: contextflow_platform (separate from any older contextflow_db).
+All bundled demo names and records are fictional.
+
+Knowledge transfer: sidebar > Knowledge transfer. Acting as: Ananya=manager(1), Rahul=senior(2), Kabir=successor(5).

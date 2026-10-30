@@ -1,0 +1,21 @@
+const express=require('express');
+const {listUsers,createUser}=require('../controllers/userController');
+const {getDashboard}=require('../controllers/dashboardController');
+const {listMeetings,getMeeting,createMeeting,addMeetingNote}=require('../controllers/meetingController');
+const {listActions,getAction,createAction,updateAction,carryForward}=require('../controllers/actionController');
+const {extractMeetingNotes,reviewGeneration,createHandover}=require('../controllers/aiController');
+const {listDocuments,createDocument,getDocument,recommendForTask,createLink}=require('../controllers/knowledgeController');
+
+const T=require('../controllers/transferController');
+const router=express.Router();
+router.get('/dashboard',getDashboard);
+router.get('/users',listUsers);router.post('/users',createUser);
+router.get('/meetings',listMeetings);router.post('/meetings',createMeeting);router.get('/meetings/:id',getMeeting);router.post('/meetings/:id/notes',addMeetingNote);
+router.get('/action-items',listActions);router.post('/action-items',createAction);router.get('/action-items/:id',getAction);router.patch('/action-items/:id',updateAction);router.post('/action-items/:id/carry-forward',carryForward);
+router.post('/ai/meetings/:id/extract',extractMeetingNotes);router.post('/ai/generations/:id/review',reviewGeneration);
+router.get('/knowledge',listDocuments);router.post('/knowledge',createDocument);router.get('/knowledge/:id',getDocument);router.post('/knowledge/recommend/:taskId',recommendForTask);router.post('/knowledge/links',createLink);
+router.post('/handover/:userId/generate',createHandover);
+router.get('/transfers',T.listSessions);router.post('/transfers',T.createSession);router.get('/transfers/:id',T.getSession);
+router.post('/transfers/:id/inputs',T.addInput);router.post('/transfers/:id/report',T.generateReport);router.post('/transfers/:id/review',T.reviewReport);
+router.patch('/transfers/:id/checklist/:itemId',T.toggleChecklist);router.post('/transfers/:id/tasks/:taskId/acknowledge',T.acknowledgeTask);router.post('/transfers/:id/ask',T.askQuestion);
+module.exports=router;
